@@ -110,4 +110,11 @@ local Button = Tab:CreateButton({
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "Change m9 name",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Prison-life/refs/heads/main/CHANGE%20m9%20WEAPON%20name", true))()
+   end,
+})
+
 local Tab = Window:CreateTab("Tsb Scripts", nill) -- Title, Image

@@ -117,4 +117,18 @@ local Button = Tab:CreateButton({
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "Change ak name",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Prison-life/refs/heads/main/Change%20Ak%20weapon.lua", true))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "prison life gui admin (idk)",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Prison-life/refs/heads/main/gui.lua", true))()
+   end,
+})
+
 local Tab = Window:CreateTab("Tsb Scripts", nill) -- Title, Image

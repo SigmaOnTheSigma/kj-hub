@@ -125,9 +125,9 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "prison life gui admin (idk)",
+   Name = "change rem name",
    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Prison-life/refs/heads/main/gui.lua", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Prison-life/refs/heads/main/Change%20rem%20name.lua", true))()
    end,
 })
 

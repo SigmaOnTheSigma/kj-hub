@@ -138,4 +138,11 @@ local Button = Tab:CreateButton({
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "real",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Chat", true))()
+   end,
+})
+
 local Tab = Window:CreateTab("Tsb Scripts", nill) -- Title, Image

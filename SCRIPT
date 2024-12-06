@@ -145,4 +145,11 @@ local Button = Tab:CreateButton({
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "kj ufw anim",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/KjV2/refs/heads/main/Kj%20ufw%20anim.lua", true))()
+   end,
+})
+
 local Tab = Window:CreateTab("Tsb Scripts", nill) -- Title, Image

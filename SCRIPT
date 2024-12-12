@@ -152,4 +152,11 @@ local Button = Tab:CreateButton({
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "D E A T H",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/DEATH", true))()
+   end,
+})
+
 local Tab = Window:CreateTab("Tsb Scripts", nill) -- Title, Image

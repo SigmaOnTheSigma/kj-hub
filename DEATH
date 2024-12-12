@@ -1,6 +1,7 @@
-local args = { 
- [1] = "D E A T H",
- [2] = 12,
- [3] = "ppp7074"
-{
-game:Getservice("Replicatedstorage"):WaitForChild("EventsFolder"):WaitForChild("Generate"):FireSever(unpack(args))
+local args = {
+    [1] = "Shockwave",
+    [2] = 12,
+    [3] = "ppp7074" => user name
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("EventsFolder"):WaitForChild("GenerateAttack"):FireServer(unpack(args))

@@ -1,0 +1,6 @@
+local args = { 
+ [1] = "D E A T H",
+ [2] = 12,
+ [3] = "ppp7074"
+{
+game:Getservice("Replicatedstorage"):WaitForChild("EventsFolder"):WaitForChild("Generate"):FireSever(unpack(args))

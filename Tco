@@ -1,0 +1,5 @@
+local message = ";gear me 1103011681"
+
+--[ Do not edit under here pls ]--
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message,"LocalPlayer")

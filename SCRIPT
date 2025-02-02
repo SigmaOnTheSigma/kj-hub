@@ -185,6 +185,6 @@ local Tab = Window:CreateTab("Prison Life", nill) -- Title, Image
 local Button = Tab:CreateButton({
    Name = "Criminal yourself",
    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Moveset/refs/heads/main/Garou%20To%20Sukuna", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Criminal.lua", true))()
    end,
 })

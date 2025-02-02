@@ -1,9 +1,9 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "TSB leaks",
-   LoadingTitle = "Rayfield Interface Suite",
-   LoadingSubtitle = "by Sirius",
+   Name = "Bigback",
+   LoadingTitle = "Sup Biggie",
+   LoadingSubtitle = "...",
    ConfigurationSaving = {
       Enabled = falase,
       FolderName = nil, -- Create a custom folder for your hub/game
@@ -16,17 +16,17 @@ local Window = Rayfield:CreateWindow({
    },
    KeySystem = true, -- Set this to true to use our key system
    KeySettings = {
-      Title = "discord.gg/sslay",
-      Subtitle = "sslay",
-      Note = "No method of obtaining the key is provided",
+      Title = "Big Back Key System",
+      Subtitle = "The Biggest Hub Ever",
+      Note = "Key = BigBack",
       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"KJ"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+      Key = {"BigBack"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
-local MainTab = Window:CreateTab("🏡", nill) -- Title, Image
+local MainTab = Window:CreateTab("Basic Scripts 🗿", nill) -- Title, Image
 local MainSection = MainTab:CreateSection("Main")
 
 Rayfield:Notify({
@@ -180,4 +180,11 @@ local Button = Tab:CreateButton({
    end,
 })
 
-local Tab = Window:CreateTab("Tsb Scripts", nill) -- Title, Image
+local Tab = Window:CreateTab("Prison Life", nill) -- Title, Image
+
+local Button = Tab:CreateButton({
+   Name = "Criminal yourself",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/Moveset/refs/heads/main/Garou%20To%20Sukuna", true))()
+   end,
+})

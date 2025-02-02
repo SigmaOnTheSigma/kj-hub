@@ -6,4 +6,6 @@ local crimpart = game.Workspace["Criminals Spawn"].SpawnLocation
 
 local hrp = char.HumanoidRootPart
 
+
+crimpart.CanCollide = false
 crimpart.CFrame = hrp.CFrame

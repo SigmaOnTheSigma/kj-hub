@@ -194,6 +194,6 @@ local Tab = Window:CreateTab("Knock The Blocks 🅱️🅾️🅾️🅱️S", n
 local Button = Tab:CreateButton({
    Name = "InstaWin",
    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Criminal.lua", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/TeleportToWin.lua", true))()
    end,
 })

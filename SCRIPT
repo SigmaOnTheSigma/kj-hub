@@ -208,8 +208,8 @@ local Button = Tab:CreateButton({
 local Tab = Window:CreateTab("LocalScripts WIP", nill) -- Title, Image
 
 local Button = Tab:CreateButton({
-   Name = "Jump And Slam",
+   Name = "Rocks And Spin",
    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Newtool", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/ToolUpd", true))()
    end,
 })

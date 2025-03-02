@@ -22,7 +22,7 @@ handle.Parent = tool
 -- Add the tool to the player's backpack
 tool.Parent = backpack
 
--- Function to make the rocks fall and add explosion effects
+-- Function to make the rocks fall
 local function dropRocks()
     local humanoid = character:FindFirstChild("Humanoid")
     local rootPart = character:FindFirstChild("HumanoidRootPart")
@@ -33,7 +33,7 @@ local function dropRocks()
     local rockCount = 25
     local rockSize = Vector3.new(3, 3, 3)
 
-    -- Function to create a rock with explosion effects
+    -- Function to create a rock
     local function createRock()
         local rock = Instance.new("Part")
         rock.Size = rockSize
@@ -45,37 +45,19 @@ local function dropRocks()
         rock.Position = rootPart.Position + Vector3.new(math.random(-20, 20), 50, math.random(-20, 20)) -- Position above the player
         rock.Parent = game.Workspace
 
-        -- Add Fire effect to the rock
-        local fire = Instance.new("Fire")
-        fire.Parent = rock
-        fire.Size = 10
-        fire.Heat = 25
-        fire.Enabled = true
-
-        -- Apply random falling speed
+        -- Apply random falling speed to the rock
         local bodyVelocity = Instance.new("BodyVelocity")
         bodyVelocity.MaxForce = Vector3.new(10000, 10000, 10000) -- Max force to make the rock fall fast
         bodyVelocity.Velocity = Vector3.new(0, -50, 0) -- Falling speed downwards
         bodyVelocity.Parent = rock
 
-        -- Function to handle rock touching the ground and triggering explosion
-        local function onRockTouched(hit)
-            -- Check if the rock touches the terrain or any grounded object
+        -- Destroy the rock once it hits the ground
+        rock.Touched:Connect(function(hit)
             if hit and hit:IsDescendantOf(game.Workspace.Terrain) then 
-                -- Create explosion effect
-                local explosion = Instance.new("Explosion")
-                explosion.Position = rock.Position
-                explosion.BlastRadius = 10
-                explosion.BlastPressure = 1000
-                explosion.Parent = game.Workspace
-
                 -- Destroy the rock
                 rock:Destroy()
             end
-        end
-
-        -- Connect the touched event to trigger explosion
-        rock.Touched:Connect(onRockTouched)
+        end)
     end
 
     -- Create multiple rocks falling down

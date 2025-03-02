@@ -58,15 +58,10 @@ local function dropRocks()
         bodyVelocity.Velocity = Vector3.new(0, -50, 0) -- Falling speed downwards
         bodyVelocity.Parent = rock
 
-        -- Create Explosion Sound
-        local explosionSound = Instance.new("Sound")
-        explosionSound.SoundId = "rbxassetid://184556254" -- Explosion sound effect in Roblox
-        explosionSound.Volume = 1
-        explosionSound.Parent = rock
-
-        -- Destroy the rock after it hits the ground and trigger explosion
-        rock.Touched:Connect(function(hit)
-            if hit and hit:IsDescendantOf(game.Workspace.Terrain) then -- Check if the rock touches the ground
+        -- Function to handle rock touching the ground and triggering explosion
+        local function onRockTouched(hit)
+            -- Check if the rock touches the terrain or any grounded object
+            if hit and hit:IsDescendantOf(game.Workspace.Terrain) then 
                 -- Create explosion effect
                 local explosion = Instance.new("Explosion")
                 explosion.Position = rock.Position
@@ -74,13 +69,13 @@ local function dropRocks()
                 explosion.BlastPressure = 1000
                 explosion.Parent = game.Workspace
 
-                -- Play the explosion sound
-                explosionSound:Play()
-
                 -- Destroy the rock
                 rock:Destroy()
             end
-        end)
+        end
+
+        -- Connect the touched event to trigger explosion
+        rock.Touched:Connect(onRockTouched)
     end
 
     -- Create multiple rocks falling down
@@ -93,8 +88,8 @@ end
 -- Function to make the player chat "Rock SkyFall!" when the tool is activated
 local function onToolActivated()
     -- Send message in the chat when the tool is activated
-    local TextChatService = game:GetService("TextChatService")
-    local playerChat = TextChatService.Chat
+    local textChatService = game:GetService("TextChatService")
+    local playerChat = textChatService.Chat
 
     -- Send chat message using the new TextChatService
     playerChat:Chat(character, "Rock SkyFall!", Enum.ChatColor.Blue)

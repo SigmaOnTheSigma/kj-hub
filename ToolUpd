@@ -1,6 +1,5 @@
 -- LocalScript to be placed inside StarterPlayerScripts or StarterCharacterScripts
 
--- Create the tool and add it to the player's backpack
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local backpack = player.Backpack
@@ -26,7 +25,11 @@ tool.Parent = backpack
 local spinning = false
 local bodyGyro
 
--- Function to make the rocks fall and add fire effects
+-- Get the new chat service
+local TextChatService = game:GetService("TextChatService")
+local playerChat = TextChatService.Chat
+
+-- Function to make the rocks fall and add explosion effects
 local function dropRocks()
     local humanoid = character:WaitForChild("Humanoid")
     local rootPart = character:WaitForChild("HumanoidRootPart")
@@ -36,7 +39,7 @@ local function dropRocks()
     local rockCount = 25
     local rockSize = Vector3.new(3, 3, 3)
 
-    -- Function to create a rock with fire effects
+    -- Function to create a rock with explosion effects
     local function createRock()
         local rock = Instance.new("Part")
         rock.Size = rockSize
@@ -61,10 +64,33 @@ local function dropRocks()
         bodyVelocity.Velocity = Vector3.new(0, -50, 0) -- Falling speed downwards
         bodyVelocity.Parent = rock
 
-        -- Destroy the rock after it hits the ground
+        -- Create Explosion Sound
+        local explosionSound = Instance.new("Sound")
+        explosionSound.SoundId = "rbxassetid://184556254" -- Explosion sound effect in Roblox
+        explosionSound.Volume = 1
+        explosionSound.Parent = rock
+        
+        -- Destroy the rock after it hits the ground and trigger explosion
         rock.Touched:Connect(function(hit)
             if hit and hit:IsGrounded() then -- Check if the rock touches the ground
-                rock:Destroy() -- Destroy rock
+                -- Create explosion effect
+                local explosion = Instance.new("Explosion")
+                explosion.Position = rock.Position
+                explosion.BlastRadius = 10
+                explosion.BlastPressure = 1000
+                explosion.Parent = game.Workspace
+
+                -- Play the explosion sound
+                explosionSound:Play()
+
+                -- Destroy the rock
+                rock:Destroy()
+
+                -- Send the message "Rock SkyFall!" to the chat using the new TextChatService
+                playerChat:Chat(character, "Rock SkyFall!", Enum.ChatColor.Blue)
+                
+                -- Trigger the player dance
+                playerChat:Chat(character, "/e dance", Enum.ChatColor.Green)
             end
         end)
     end
@@ -96,15 +122,25 @@ local function dropRocks()
     end
 end
 
--- Connect the tool's activation to the rock drop and player spin effect
-tool.Activated:Connect(function()
+-- Function to make the player chat "Rock SkyFall!" when the tool is activated
+local function onToolActivated()
+    -- Send message in the chat when the tool is activated
+    local chatMessage = "Rock SkyFall!"
+    
+    -- Send chat message using the new TextChatService
+    playerChat:Chat(character, chatMessage, Enum.ChatColor.Blue)
+
+    -- Call the function to drop rocks after chatting
     dropRocks()
-end)
+end
+
+-- Connect the tool's activation to the onToolActivated function
+tool.Activated:Connect(onToolActivated)
 
 -- Stop the spin when the tool is deactivated
 tool.Deactivated:Connect(function()
     if bodyGyro then
-        bodyGyro:Destroy()  -- Remove the BodyGyro to stop the spinning
-        spinning = false    -- Ensure the spinning flag is reset
+        bodyGyro:Destroy() -- Remove the BodyGyro to stop the spinning
+        spinning = false -- Ensure the spinning flag is reset
     end
 end)

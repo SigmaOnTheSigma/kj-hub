@@ -1,0 +1,110 @@
+-- LocalScript to be placed inside StarterPlayerScripts or StarterCharacterScripts
+
+-- Create the tool and add it to the player's backpack
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local backpack = player.Backpack
+
+-- Create the tool
+local tool = Instance.new("Tool")
+tool.Name = "JumpSlamTool"
+tool.RequiresHandle = true
+tool.ToolTip = "Press to drop rocks!"
+
+-- Create the handle for the tool
+local handle = Instance.new("Part")
+handle.Name = "Handle"
+handle.Size = Vector3.new(1, 1, 1)
+handle.Anchored = false
+handle.CanCollide = false
+handle.Transparency = 1 -- Make the handle invisible
+handle.Parent = tool
+
+-- Add the tool to the player's backpack
+tool.Parent = backpack
+
+local spinning = false
+local bodyGyro
+
+-- Function to make the rocks fall and add fire effects
+local function dropRocks()
+    local humanoid = character:WaitForChild("Humanoid")
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    local camera = game.Workspace.CurrentCamera
+
+    -- Set the rock count to 25
+    local rockCount = 25
+    local rockSize = Vector3.new(3, 3, 3)
+
+    -- Function to create a rock with fire effects
+    local function createRock()
+        local rock = Instance.new("Part")
+        rock.Size = rockSize
+        rock.Shape = Enum.PartType.Ball
+        rock.Anchored = false
+        rock.CanCollide = true
+        rock.Material = Enum.Material.SmoothPlastic
+        rock.BrickColor = BrickColor.new("Dark stone grey")
+        rock.Position = rootPart.Position + Vector3.new(math.random(-20, 20), 50, math.random(-20, 20)) -- Position above the player
+        rock.Parent = game.Workspace
+
+        -- Add Fire effect to the rock
+        local fire = Instance.new("Fire")
+        fire.Parent = rock
+        fire.Size = 10
+        fire.Heat = 25
+        fire.Enabled = true
+
+        -- Apply random falling speed
+        local bodyVelocity = Instance.new("BodyVelocity")
+        bodyVelocity.MaxForce = Vector3.new(10000, 10000, 10000) -- Max force to make the rock fall fast
+        bodyVelocity.Velocity = Vector3.new(0, -50, 0) -- Falling speed downwards
+        bodyVelocity.Parent = rock
+
+        -- Destroy the rock after it hits the ground
+        rock.Touched:Connect(function(hit)
+            if hit and hit:IsGrounded() then -- Check if the rock touches the ground
+                rock:Destroy() -- Destroy rock
+            end
+        end)
+    end
+
+    -- Create multiple rocks falling down
+    for i = 1, rockCount do
+        wait(math.random() * 0.1) -- Random delay to make rocks fall at different times
+        createRock()
+    end
+
+    -- Make the player spin
+    if not spinning then
+        spinning = true
+        bodyGyro = Instance.new("BodyGyro")
+        bodyGyro.MaxTorque = Vector3.new(10000, 10000, 10000) -- Max torque for strong rotation
+        bodyGyro.CFrame = rootPart.CFrame
+        bodyGyro.Parent = rootPart
+
+        -- Rotate the player continuously for 2 seconds
+        local startTime = tick()
+        while tick() - startTime < 2 do
+            bodyGyro.CFrame = rootPart.CFrame * CFrame.Angles(0, math.rad(360), 0) -- Spin around the Y-axis
+            wait(0.05)
+        end
+
+        -- Remove the BodyGyro after the spin
+        bodyGyro:Destroy()
+        spinning = false
+    end
+end
+
+-- Connect the tool's activation to the rock drop and player spin effect
+tool.Activated:Connect(function()
+    dropRocks()
+end)
+
+-- Stop the spin when the tool is deactivated
+tool.Deactivated:Connect(function()
+    if bodyGyro then
+        bodyGyro:Destroy()  -- Remove the BodyGyro to stop the spinning
+        spinning = false    -- Ensure the spinning flag is reset
+    end
+end)

@@ -1,0 +1,46 @@
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = game.Players.LocalPlayer
+local backpack = player.Backpack
+local toolTemplate = Instance.new("Tool")
+
+-- Function to give the player the tool
+local function giveTool()
+    local toolClone = toolTemplate:Clone()
+    toolClone.Parent = backpack
+
+    -- Listen for when the tool is activated
+    toolClone.Activated:Connect(function()
+        -- Call the function to send the player up and slowly drop them
+        sendPlayerInAir(toolClone)
+    end)
+end
+
+-- Function to send the player 40 studs into the air and drop them slowly
+local function sendPlayerInAir(tool)
+    local character = player.Character
+    if not character then return end
+    
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    local originalPosition = humanoidRootPart.Position
+    local targetPosition = originalPosition + Vector3.new(0, 40, 0)  -- 40 studs in the air
+
+    -- Move the player to the target position
+    humanoidRootPart.CFrame = CFrame.new(targetPosition)
+
+    -- Create a tween to slowly drop the player back to the ground
+    local tweenInfo = TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)  -- 5 seconds to fall
+    local goal = {Position = originalPosition}
+
+    local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
+    tween:Play()
+
+    -- Once the tween completes, unequip the tool
+    tween.Completed:Connect(function()
+        -- Unequip the tool from the backpack
+        tool:Destroy()
+    end)
+end
+
+-- Call the function to give the tool to the player when they join
+giveTool()

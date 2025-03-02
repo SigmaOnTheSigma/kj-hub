@@ -204,3 +204,12 @@ local Button = Tab:CreateButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/TeleportToWin.lua", true))()
    end,
 })
+
+local Tab = Window:CreateTab("LocalScripts WIP", nill) -- Title, Image
+
+local Button = Tab:CreateButton({
+   Name = "InstaWin",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Tool", true))()
+   end,
+})

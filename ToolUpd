@@ -6,7 +6,7 @@ local backpack = player.Backpack
 
 -- Create the tool
 local tool = Instance.new("Tool")
-tool.Name = "Rock SkyFall"
+tool.Name = "JumpSlamTool"
 tool.RequiresHandle = true
 tool.ToolTip = "Press to drop rocks!"
 
@@ -58,16 +58,16 @@ local function dropRocks()
         bodyVelocity.Velocity = Vector3.new(0, -50, 0) -- Falling speed downwards
         bodyVelocity.Parent = rock
 
-        -- Function to handle rock touching the ground
+        -- Function to handle rock touching the ground and destroying it
         local function onRockTouched(hit)
             -- Check if the rock touches the terrain or any grounded object
-            if hit and hit:IsDescendantOf(game.Workspace.Terrain) then 
+            if hit and (hit:IsDescendantOf(game.Workspace.Terrain) or hit:IsA("Part") and hit.Anchored == true) then
                 -- Destroy the rock
                 rock:Destroy()
             end
         end
 
-        -- Connect the touched event
+        -- Connect the touched event to detect collision with the ground
         rock.Touched:Connect(onRockTouched)
     end
 

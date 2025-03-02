@@ -22,18 +22,12 @@ handle.Parent = tool
 -- Add the tool to the player's backpack
 tool.Parent = backpack
 
-local spinning = false
-local bodyGyro
-
--- Get the new chat service
-local TextChatService = game:GetService("TextChatService")
-local playerChat = TextChatService.Chat
-
 -- Function to make the rocks fall and add explosion effects
 local function dropRocks()
-    local humanoid = character:WaitForChild("Humanoid")
-    local rootPart = character:WaitForChild("HumanoidRootPart")
-    local camera = game.Workspace.CurrentCamera
+    local humanoid = character:FindFirstChild("Humanoid")
+    local rootPart = character:FindFirstChild("HumanoidRootPart")
+    
+    if not humanoid or not rootPart then return end -- Ensure humanoid and root part are present
 
     -- Set the rock count to 25
     local rockCount = 25
@@ -69,10 +63,10 @@ local function dropRocks()
         explosionSound.SoundId = "rbxassetid://184556254" -- Explosion sound effect in Roblox
         explosionSound.Volume = 1
         explosionSound.Parent = rock
-        
+
         -- Destroy the rock after it hits the ground and trigger explosion
         rock.Touched:Connect(function(hit)
-            if hit and hit:IsGrounded() then -- Check if the rock touches the ground
+            if hit and hit:IsDescendantOf(game.Workspace.Terrain) then -- Check if the rock touches the ground
                 -- Create explosion effect
                 local explosion = Instance.new("Explosion")
                 explosion.Position = rock.Position
@@ -85,12 +79,6 @@ local function dropRocks()
 
                 -- Destroy the rock
                 rock:Destroy()
-
-                -- Send the message "Rock SkyFall!" to the chat using the new TextChatService
-                playerChat:Chat(character, "Rock SkyFall!", Enum.ChatColor.Blue)
-                
-                -- Trigger the player dance
-                playerChat:Chat(character, "/e dance", Enum.ChatColor.Green)
             end
         end)
     end
@@ -100,35 +88,16 @@ local function dropRocks()
         wait(math.random() * 0.1) -- Random delay to make rocks fall at different times
         createRock()
     end
-
-    -- Make the player spin
-    if not spinning then
-        spinning = true
-        bodyGyro = Instance.new("BodyGyro")
-        bodyGyro.MaxTorque = Vector3.new(10000, 10000, 10000) -- Max torque for strong rotation
-        bodyGyro.CFrame = rootPart.CFrame
-        bodyGyro.Parent = rootPart
-
-        -- Rotate the player continuously for 2 seconds
-        local startTime = tick()
-        while tick() - startTime < 2 do
-            bodyGyro.CFrame = rootPart.CFrame * CFrame.Angles(0, math.rad(360), 0) -- Spin around the Y-axis
-            wait(0.05)
-        end
-
-        -- Remove the BodyGyro after the spin
-        bodyGyro:Destroy()
-        spinning = false
-    end
 end
 
 -- Function to make the player chat "Rock SkyFall!" when the tool is activated
 local function onToolActivated()
     -- Send message in the chat when the tool is activated
-    local chatMessage = "Rock SkyFall!"
-    
+    local TextChatService = game:GetService("TextChatService")
+    local playerChat = TextChatService.Chat
+
     -- Send chat message using the new TextChatService
-    playerChat:Chat(character, chatMessage, Enum.ChatColor.Blue)
+    playerChat:Chat(character, "Rock SkyFall!", Enum.ChatColor.Blue)
 
     -- Call the function to drop rocks after chatting
     dropRocks()
@@ -136,11 +105,3 @@ end
 
 -- Connect the tool's activation to the onToolActivated function
 tool.Activated:Connect(onToolActivated)
-
--- Stop the spin when the tool is deactivated
-tool.Deactivated:Connect(function()
-    if bodyGyro then
-        bodyGyro:Destroy() -- Remove the BodyGyro to stop the spinning
-        spinning = false -- Ensure the spinning flag is reset
-    end
-end)

@@ -6,7 +6,7 @@ local backpack = player.Backpack
 
 -- Create the tool
 local tool = Instance.new("Tool")
-tool.Name = "JumpSlamTool"
+tool.Name = "Rock SkyFall"
 tool.RequiresHandle = true
 tool.ToolTip = "Press to drop rocks!"
 
@@ -22,7 +22,7 @@ handle.Parent = tool
 -- Add the tool to the player's backpack
 tool.Parent = backpack
 
--- Function to make the rocks fall and add explosion effects
+-- Function to make the rocks fall
 local function dropRocks()
     local humanoid = character:FindFirstChild("Humanoid")
     local rootPart = character:FindFirstChild("HumanoidRootPart")
@@ -33,7 +33,7 @@ local function dropRocks()
     local rockCount = 25
     local rockSize = Vector3.new(3, 3, 3)
 
-    -- Function to create a rock with fire and explosion effects
+    -- Function to create a rock with fire effects
     local function createRock()
         local rock = Instance.new("Part")
         rock.Size = rockSize
@@ -58,23 +58,16 @@ local function dropRocks()
         bodyVelocity.Velocity = Vector3.new(0, -50, 0) -- Falling speed downwards
         bodyVelocity.Parent = rock
 
-        -- Function to handle rock touching the ground and triggering explosion
+        -- Function to handle rock touching the ground
         local function onRockTouched(hit)
             -- Check if the rock touches the terrain or any grounded object
             if hit and hit:IsDescendantOf(game.Workspace.Terrain) then 
-                -- Create explosion effect
-                local explosion = Instance.new("Explosion")
-                explosion.Position = rock.Position
-                explosion.BlastRadius = 10
-                explosion.BlastPressure = 1000
-                explosion.Parent = game.Workspace
-
                 -- Destroy the rock
                 rock:Destroy()
             end
         end
 
-        -- Connect the touched event to trigger explosion
+        -- Connect the touched event
         rock.Touched:Connect(onRockTouched)
     end
 
@@ -93,3 +86,34 @@ end
 
 -- Connect the tool's activation to the onToolActivated function
 tool.Activated:Connect(onToolActivated)
+
+
+-- Add GUI for toggling walk speed
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Create a GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Create a TextButton
+local textButton = Instance.new("TextButton")
+textButton.Size = UDim2.new(0, 200, 0, 50)
+textButton.Position = UDim2.new(0.5, -100, 0.9, -25)
+textButton.Text = "Toggle Walk Speed"
+textButton.Parent = screenGui
+
+-- Initial walk speed value
+local walkSpeed = 16
+humanoid.WalkSpeed = walkSpeed
+
+-- Function to toggle walk speed
+local function toggleWalkSpeed()
+    if humanoid.WalkSpeed == 16 then
+        humanoid.WalkSpeed = 75
+    else
+        humanoid.WalkSpeed = 16
+    end
+end
+
+-- Connect the button click event to toggle walk speed
+textButton.MouseButton1Click:Connect(toggleWalkSpeed)

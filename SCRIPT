@@ -213,3 +213,10 @@ local Button = Tab:CreateButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/ToolUpd", true))()
    end,
 })
+
+local Button = Tab:CreateButton({
+   Name = "tsb real",
+   Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Realtools.lua", true))()
+   end,
+})

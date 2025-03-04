@@ -1,80 +1,128 @@
-local function createTool(toolName, animationId, speedOnActivate, speedOnDeactivate)
-    -- Create a tool
-    local tool = Instance.new("Tool")
-    tool.Name = toolName
-    tool.RequiresHandle = true
+-- LocalScript (placed in StarterPlayerScripts)
 
-    -- Create a handle for the tool
-    local handle = Instance.new("Part")
-    handle.Name = "Handle"
-    handle.Size = Vector3.new(1, 5, 1)
-    handle.Anchored = false
-    handle.CanCollide = false
-    handle.Parent = tool
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local gui = Instance.new("ScreenGui")
+gui.Parent = player:WaitForChild("PlayerGui")
 
-    -- Create an Animator for the tool
-    local animator = Instance.new("Animator")
-    animator.Parent = handle
+-- Create Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 150)
+frame.Position = UDim2.new(0.5, -100, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+frame.Parent = gui
 
-    -- Create an animation
-    local animation = Instance.new("Animation")
-    animation.AnimationId = "rbxassetid://" .. animationId
-    animation.Parent = animator
+-- Make Frame Draggable
+local dragging = false
+local dragStart = nil
+local startPos = nil
 
-    -- Function to set the player's walk speed
-    local function setWalkSpeed(speed)
-        local player = game.Players.LocalPlayer
-        if player and player.Character then
-            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-            if humanoid then
-                humanoid.WalkSpeed = speed
-            end
-        end
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
     end
+end)
 
-    -- Play animation and change walk speed when tool is activated
-    tool.Activated:Connect(function()
-        local track = animator:LoadAnimation(animation)
-        track:Play()
+frame.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
 
-        -- Change walk speed to the specified value
-        setWalkSpeed(speedOnActivate)
+frame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
 
-        track.Stopped:Connect(function()
-            track:Stop()
-        end)
-    end)
+-- Create Buttons
+local button1 = Instance.new("TextButton")
+button1.Size = UDim2.new(0, 180, 0, 40)
+button1.Position = UDim2.new(0, 10, 0, 10)
+button1.Text = "Toggle Walk Speed"
+button1.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+button1.Parent = frame
 
-    -- Stop animation and reset walk speed when tool is deactivated or unequipped
-    tool.Deactivated:Connect(function()
-        local track = animator:LoadAnimation(animation)
-        track:Stop()
+local button2 = Instance.new("TextButton")
+button2.Size = UDim2.new(0, 180, 0, 40)
+button2.Position = UDim2.new(0, 10, 0, 60)
+button2.Text = "Rat Dance"
+button2.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+button2.Parent = frame
 
-        -- Reset walk speed to the default value
-        setWalkSpeed(speedOnDeactivate)
-    end)
+local button3 = Instance.new("TextButton")
+button3.Size = UDim2.new(0, 180, 0, 40)
+button3.Position = UDim2.new(0, 10, 0, 110)
+button3.Text = "Slickback Dance"
+button3.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+button3.Parent = frame
 
-    -- Reset walk speed when tool is unequipped
-    tool.Equipped:Connect(function()
-        -- Do nothing when equipped (no speed change)
-    end)
+-- Walk Speed Toggle
+local normalWalkSpeed = player.Character.Humanoid.WalkSpeed
+local isSpeedChanged = false
 
-    tool.Unequipped:Connect(function()
-        -- Reset walk speed when tool is unequipped
-        setWalkSpeed(speedOnDeactivate)
-    end)
+button1.MouseButton1Click:Connect(function()
+    if isSpeedChanged then
+        player.Character.Humanoid.WalkSpeed = normalWalkSpeed
+        isSpeedChanged = false
+    else
+        player.Character.Humanoid.WalkSpeed = 75
+        isSpeedChanged = true
+    end
+end)
 
-    return tool
-end
+-- Rat Dance Meme (second button)
+button2.MouseButton1Click:Connect(function()
+    local character = player.Character
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Make arms move back and forth to simulate dance
+    local leftArm = character:WaitForChild("LeftArm")
+    local rightArm = character:WaitForChild("RightArm")
+    local leftLeg = character:WaitForChild("LeftLeg")
+    local rightLeg = character:WaitForChild("RightLeg")
+    
+    -- Make arms move alternately by rotating them slightly
+    leftArm.RotVelocity = Vector3.new(0, 10, 0)
+    rightArm.RotVelocity = Vector3.new(0, -10, 0)
+    
+    -- Simulate leg movement
+    leftLeg.RotVelocity = Vector3.new(0, 15, 0)
+    rightLeg.RotVelocity = Vector3.new(0, -15, 0)
+    
+    -- Simple torso shift
+    humanoid.HipHeight = 3
+    humanoid.PlatformStand = true
+    wait(0.5)
+    humanoid.PlatformStand = false
+    humanoid.HipHeight = 2
+end)
 
--- Create the first tool "Fast Running" with animation ID 18897115785 and speed change
-local tool1 = createTool("Fast Running", "18897115785", 99, 23)
-tool1.Parent = game.Players.LocalPlayer.Backpack
-
--- Create the second tool "Wall Combo" with animation ID 18715756612
-local tool2 = createTool("Wall Combo", "18715756612", 23, 23) -- No speed change for this tool
-tool2.Parent = game.Players.LocalPlayer.Backpack
-
--- Create the third tool "Head First" with animation ID 18464362124
-local tool3 = createTool("Head First", "18464362124", 23, 23) -- No speed change for this tool
-tool3.Parent = game.Players.LocalPlayer.Backpack
+-- Slickback Dance Meme (third button)
+button3.MouseButton1Click:Connect(function()
+    local character = player.Character
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Make the character move in a "slickback" manner
+    local head = character:WaitForChild("Head")
+    local leftArm = character:WaitForChild("LeftArm")
+    local rightArm = character:WaitForChild("RightArm")
+    local torso = character:WaitForChild("Torso")
+    
+    -- Simulate small head tilts for slickback effect
+    head.RotVelocity = Vector3.new(0, 10, 0)
+    
+    -- Move arms in alternating fashion
+    leftArm.RotVelocity = Vector3.new(0, -5, 0)
+    rightArm.RotVelocity = Vector3.new(0, 5, 0)
+    
+    -- Slight torso movement to mimic the slickback style
+    humanoid.HipHeight = 3
+    humanoid.PlatformStand = true
+    wait(0.5)
+    humanoid.PlatformStand = false
+    humanoid.HipHeight = 2
+end)

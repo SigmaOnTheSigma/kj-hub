@@ -80,10 +80,10 @@ button2.MouseButton1Click:Connect(function()
     local humanoid = character:WaitForChild("Humanoid")
     
     -- Make arms move back and forth to simulate dance
-    local leftArm = character:WaitForChild("LeftArm")
-    local rightArm = character:WaitForChild("RightArm")
-    local leftLeg = character:WaitForChild("LeftLeg")
-    local rightLeg = character:WaitForChild("RightLeg")
+    local leftArm = character:WaitForChild("Left Arm")
+    local rightArm = character:WaitForChild("Right Arm")
+    local leftLeg = character:WaitForChild("Left Leg")
+    local rightLeg = character:WaitForChild("Right Leg")
     
     -- Make arms move alternately by rotating them slightly
     leftArm.RotVelocity = Vector3.new(0, 10, 0)
@@ -108,8 +108,8 @@ button3.MouseButton1Click:Connect(function()
     
     -- Make the character move in a "slickback" manner
     local head = character:WaitForChild("Head")
-    local leftArm = character:WaitForChild("LeftArm")
-    local rightArm = character:WaitForChild("RightArm")
+    local leftArm = character:WaitForChild("Left Arm")
+    local rightArm = character:WaitForChild("Right Arm")
     local torso = character:WaitForChild("Torso")
     
     -- Simulate small head tilts for slickback effect

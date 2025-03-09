@@ -1,0 +1,31 @@
+-- Execute the script from the provided URL
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/e7aad5fe2a6ead8edc56b6a086f14d1e4e6a23a1/Weak%20dum"), true))()
+
+-- Function to teleport the character, anchor, and return to the original position
+local function teleportAnchorAndReturn()
+    -- Get the player's character
+    local character = game.Live["Weakest Dummy"]
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    -- Store the original position
+    local originalPosition = humanoidRootPart.Position
+
+    -- Set a high position for the teleport
+    local highPosition = originalPosition + Vector3.new(0, 1000, 0)
+
+    -- Teleport the character to the high position
+    character:SetPrimaryPartCFrame(CFrame.new(highPosition))
+
+    -- Anchor the HumanoidRootPart
+    humanoidRootPart.Anchored = true
+
+    -- Unanchor after 10 seconds and teleport back to the original position
+    task.delay(10, function()
+        humanoidRootPart.Anchored = false
+        -- Teleport back to the original position
+        character:SetPrimaryPartCFrame(CFrame.new(originalPosition))
+    end)
+end
+
+-- Delay for 13 seconds before teleporting, anchoring, and handling the return
+task.delay(13, teleportAnchorAndReturn)

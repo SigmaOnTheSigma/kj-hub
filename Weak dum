@@ -1,0 +1,94 @@
+-- LocalScript inside StarterPlayerScripts or another suitable location
+local player = game.Players.LocalPlayer
+local soundService = game:GetService("SoundService")  -- Service to handle audio playback
+
+-- Create a Sound object
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://99126314241685"  -- Replace with your audio Asset ID
+sound.Parent = player.Character or player.CharacterAdded:Wait()  -- Parent it to the player's character, or use workspace if needed
+
+-- Set the audio to loop
+sound.Looped = false
+
+-- Play the sound automatically when the game starts
+sound:Play()
+-- LocalScript inside StarterPlayerScripts or another suitable location
+local player = game.Players.LocalPlayer
+local soundService = game:GetService("SoundService")  -- Service to handle audio playback
+
+-- Create a Sound object
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://128136381213631"  -- Replace with your audio Asset ID
+sound.Parent = player.Character or player.CharacterAdded:Wait()  -- Parent it to the player's character, or use workspace if needed
+
+-- Set the audio to loop
+sound.Looped = false
+
+-- Play the sound automatically when the game starts
+sound:Play()
+-- LocalScript inside StarterPlayerScripts or another suitable location
+local player = game.Players.LocalPlayer
+local soundService = game:GetService("SoundService")  -- Service to handle audio playback
+
+-- Create a Sound object
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://95410275491981"  -- Replace with your audio Asset ID
+sound.Parent = player.Character or player.CharacterAdded:Wait()  -- Parent it to the player's character, or use workspace if needed
+
+-- Set the audio to loop
+sound.Looped = false
+
+-- Play the sound automatically when the game starts
+sound:Play()
+-- LocalScript inside StarterPlayerScripts or another suitable location
+local player = game.Players.LocalPlayer
+local soundService = game:GetService("SoundService")  -- Service to handle audio playback
+
+-- Create a Sound object
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://99126314241685"  -- Replace with your audio Asset ID
+sound.Parent = player.Character or player.CharacterAdded:Wait()  -- Parent it to the player's character, or use workspace if needed
+
+-- Set the audio to loop
+sound.Looped = false
+
+-- Play the sound automatically when the game starts
+sound:Play()
+-- LocalScript inside StarterPlayerScripts or another suitable location
+local player = game.Players.LocalPlayer
+local soundService = game:GetService("SoundService")  -- Service to handle audio playback
+
+-- Create a Sound object
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://128136381213631"  -- Replace with your audio Asset ID
+sound.Parent = player.Character or player.CharacterAdded:Wait()  -- Parent it to the player's character, or use workspace if needed
+
+-- Set the audio to loop
+sound.Looped = false
+
+-- Play the sound automatically when the game starts
+sound:Play()
+-- LocalScript inside StarterPlayerScripts or another suitable location
+local player = game.Players.LocalPlayer
+local soundService = game:GetService("SoundService")  -- Service to handle audio playback
+
+-- Create a Sound object
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://95410275491981"  -- Replace with your audio Asset ID
+sound.Parent = player.Character or player.CharacterAdded:Wait()  -- Parent it to the player's character, or use workspace if needed
+
+-- Set the audio to loop
+sound.Looped = false
+
+-- Play the sound automatically when the game starts
+sound:Play()
+
+local animationId = "77727115892579"
+
+local character = game.Live["Weakest Dummy"]
+local humanoid = character:WaitForChild("Humanoid")
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://" .. animationId
+local animationTrack = humanoid:LoadAnimation(animation)
+animationTrack:Play() 

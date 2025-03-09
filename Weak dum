@@ -85,7 +85,7 @@ sound:Play()
 
 local animationId = "77727115892579"
 
-local character = game.Live["Weakest Dummy"]
+local character = game.Workspace.Live["Weakest Dummy"]
 local humanoid = character:WaitForChild("Humanoid")
 
 local animation = Instance.new("Animation")

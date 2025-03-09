@@ -153,9 +153,9 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "kj ufw anim",
+   Name = "weakest ufw",
    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/KjV2/refs/heads/main/Kj%20ufw%20anim.lua", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Ufw%20weak", true))()
    end,
 })
 

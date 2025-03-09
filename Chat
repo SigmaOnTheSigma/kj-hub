@@ -1,7 +1,13 @@
 local args = {
     [1] = ";enlighten o",
     [2] = "All"
-    [3] = ";clearinv o"
+}
+
+local args2 = {
+    [1] = ";clearinv o"
+    [2] = "All"
 }
 
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+wait(0.01)
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args2))

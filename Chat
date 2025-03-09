@@ -1,10 +1,7 @@
-local messages = {"Enlighten", "enlighten", "enlighten", "Ninjago!"}
- 
-local function sendMessage(text)
-    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text, "All")
-end
- 
-for _, message in ipairs(messages) do
-    sendMessage(message)
-    wait(0.1) -- Wait time for each message
-end
+local args = {
+    [1] = ";enlighten o",
+    [2] = "All"
+    [3] = ";clearinv o"
+}
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))

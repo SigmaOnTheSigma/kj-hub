@@ -1,0 +1,55 @@
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local replacementAnimations = {
+    ["18716111834"] = "rbxassetid://18896124320",
+    ["18716113810"] = "rbxassetid://18716581594",
+    ["Your Id Here"] = "rbxassetid://Here your id",
+    ["Your Id Here"] = "rbxassetid://Here your id"
+}
+
+local function onAnimationPlayed(animationTrack)
+    if player.Character and humanoid then
+        local animationId = animationTrack.Animation.AnimationId:match("%d+")
+        local replacementId = replacementAnimations[animationId]
+
+        if replacementId then
+            animationTrack:Stop()
+
+            local newAnimation = Instance.new("Animation")
+            newAnimation.AnimationId = replacementId
+            local newTrack = humanoid:LoadAnimation(newAnimation)
+            newTrack:Play()
+
+            if replacementId == "rbxassetid://18716581594" then
+                wait(2.25)
+                
+                local Test = game.ReplicatedStorage.Resources["KJEffects"].DropkickExtra.lastimpact
+                local test = Test:Clone()
+                test.Parent = character.HumanoidRootPart
+
+                for _, child in ipairs(test:GetChildren()) do
+                    if child:IsA("ParticleEmitter") then
+                        child.Color = ColorSequence.new(Color3.new(0, 1, 1))
+                        child:Emit(15)
+                        child.Enabled = true
+                    end
+                end
+
+                wait(0.1)
+                test:Destroy()
+            end
+        end
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+
+player.CharacterAdded:Connect(function(newCharacter)
+    character = newCharacter
+    humanoid = newCharacter:WaitForChild("Humanoid")
+    humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+end)

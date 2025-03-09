@@ -4,7 +4,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-h
 -- Function to teleport the character, anchor, and return to the original position
 local function teleportAnchorAndReturn()
     -- Get the player's character
-    local character = game.Live["Weakest Dummy"]
+    local character = game.Workspace.Live["Weakest Dummy"]
     local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
     -- Store the original position

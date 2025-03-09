@@ -174,9 +174,9 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "TCO",
+   Name = "TCO2",
    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Tco", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/main/Chat", true))()
    end,
 })
 

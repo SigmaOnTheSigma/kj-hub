@@ -5,8 +5,8 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
 local replacementAnimations = {
-    ["18716111834"] = "rbxassetid://18896124320",
-    ["18716113810"] = "rbxassetid://18716581594",
+    ["12272894215"] = "rbxassetid://18896124320",
+    ["12273188754"] = "rbxassetid://17799224866",
     ["Your Id Here"] = "rbxassetid://Here your id",
     ["Your Id Here"] = "rbxassetid://Here your id"
 }

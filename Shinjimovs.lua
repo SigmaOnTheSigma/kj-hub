@@ -1,4 +1,4 @@
-loadstring(game:HttpGet('https://github.com/SigmaOnTheSigma/kj-hub/blob/Movesetid/Moveset'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/Movesetid/Moveset'))()
 
 local player = game.Players.LocalPlayer
 local playerGui = player.PlayerGui

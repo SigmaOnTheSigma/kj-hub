@@ -24,7 +24,7 @@ local function onAnimationPlayed(animationTrack)
             local newTrack = humanoid:LoadAnimation(newAnimation)
             newTrack:Play()
 
-            if replacementId == "rbxassetid://18716581594" then
+            if replacementId == "rbxassetid://17799224866" then
                 wait(2.25)
                 
                 local Test = game.ReplicatedStorage.Resources["KJEffects"].DropkickExtra.lastimpact

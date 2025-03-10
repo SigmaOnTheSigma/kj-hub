@@ -1,5 +1,5 @@
 -- Execute the script from the provided URL
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/e7aad5fe2a6ead8edc56b6a086f14d1e4e6a23a1/Weak%20dum"), true))()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/SigmaOnTheSigma/kj-hub/refs/heads/Movesetid/Weak%20dum"), true))()
 
 -- Function to teleport the character, anchor, and return to the original position
 local function teleportAnchorAndReturn()

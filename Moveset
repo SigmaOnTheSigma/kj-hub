@@ -29,7 +29,7 @@ local function onAnimationPlayed(animationTrack)
             if replacementId == "rbxassetid://17799224866" then
                 wait(2.25)
                 
-                local Test = game.ReplicatedStorage.Resources["KJEffects"].DropkickExtra.lastimpact
+                local Test = game.ReplicatedStorage.Resources.KJEffects["DropkickExtra"].lastimpact
                 local test = Test:Clone()
                 test.Parent = character.HumanoidRootPart
 

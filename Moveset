@@ -10,7 +10,9 @@ local replacementAnimations = {
     ["14374357351"] = "rbxassetid://12447247483",
     ["12342141464"] = "rbxassetid://12460977270",
     ["12296882427"] = "rbxassetid://12351854556",
-    ["12296113986"] = "rbxassetid://12273188754"
+    ["12296113986"] = "rbxassetid://12273188754",
+    ["12307656616"] = "rbxassetid://138443750790136",
+    ["12351854556"] = "rbxassetid://18179181663"
 }
 
 local function onAnimationPlayed(animationTrack)
